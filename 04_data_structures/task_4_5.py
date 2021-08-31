@@ -35,6 +35,6 @@ command2_temp = command2.split()
 command2_vlans = command2_temp[-1].split(',')
 
 result = set(command1_vlans) & set(command2_vlans)
-result = str(result)
+result = ','.join(result) 
 
-print (result.sort)
+print (result)
