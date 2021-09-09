@@ -30,10 +30,10 @@ ospf_last_update = ospf_route[4]
 ospf_outband_int = ospf_route[5]
 
 print(f'''
-Prefix {ospf_prefix:>25}
-AD/Metric {ospf_ad_metric:>16}
-Next-Hop {ospf_next_hop:>20}
-Last update {ospf_last_update:>13}
-Outband interface {ospf_outband_int:<4}
+{'Prefix':20} {ospf_prefix}
+{'AD/Metric':20} {ospf_ad_metric}
+{'Next-Hop':20} {ospf_next_hop}
+{'Last update':20} {ospf_last_update}
+{'Outband interface':20} {ospf_outband_int}
 ''')
 
