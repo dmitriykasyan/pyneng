@@ -16,3 +16,15 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
+
+print(mac)
+
+print('#'*40)
+
+mac_list = mac.split(':')
+mac_oct1 = bin(int(mac_list[0],16))
+mac_oct2 = bin(int(mac_list[1],16))
+mac_oct3 = bin(int(mac_list[2],16))
+
+mac_common = mac_oct1[2::]+mac_oct2[2::]+mac_oct3[2::]
+print (mac_common)
