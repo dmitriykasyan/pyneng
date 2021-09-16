@@ -46,3 +46,13 @@ london_co = {
         "routing": True,
     },
 }
+
+# подключение модуля sys
+from sys import argv
+# выполнение задачи
+device = input('Введите имя устройства:r1,r2,sw1 ')
+
+res = london_co[device].items()
+result = str(res)[12:-2].strip("()").replace("',", "':").replace("), (",",")
+print ('{',result,'}')
+

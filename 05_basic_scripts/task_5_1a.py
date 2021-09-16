@@ -44,3 +44,10 @@ london_co = {
         "routing": True,
     },
 }
+
+from sys import argv
+
+device = input('Введите имя устройства: ')
+param = input('Введите имя параметра: ')
+
+print(london_co[device][param])
