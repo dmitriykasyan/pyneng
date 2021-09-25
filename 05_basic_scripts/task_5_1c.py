@@ -49,3 +49,12 @@ london_co = {
         "routing": True,
     },
 }
+
+from sys import argv
+
+dev = input('Введите имя устройства: ')
+param_list = str(london_co[dev].keys())[10:-1].strip("['']").replace("', '",", ")
+print('Введите имя параметра ('+ param_list +')'); param = input()
+
+print ('\n' + london_co[dev].get(param,'Такого параметра нет'))
+

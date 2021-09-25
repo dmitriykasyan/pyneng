@@ -30,3 +30,41 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+from sys import argv
+
+source=input('Введите IP адрес в формате: 10.1.1.0/24  ')
+
+source_list=source.replace('/', '.').split('.')
+
+ip_oct1=int(source_list[0])
+ip_oct2=int(source_list[1])
+ip_oct3=int(source_list[2])
+ip_oct4=int(source_list[3])
+mask=int(source_list[4])
+
+print('\n')
+print (f'''
+Network:
+{ip_oct1:<10} {ip_oct2:<10} {ip_oct3:<10} {ip_oct4:<10} 
+{ip_oct1:>010b} {ip_oct2:>010b} {ip_oct3:>010b} {ip_oct4:>010b} 
+      ''')
+
+bit_mask='1' * mask + '0' * (32-mask)
+
+bit_mask_oct1=bit_mask[:8]
+bit_mask_oct2=bit_mask[8:16]
+bit_mask_oct3=bit_mask[16:24]
+bit_mask_oct4=bit_mask[24:]
+
+bit_mask_1=int(bit_mask_oct1,2)
+bit_mask_2=int(bit_mask_oct2,2)
+bit_mask_3=int(bit_mask_oct3,2)
+bit_mask_4=int(bit_mask_oct4,2)
+
+print (f'''
+Mask:
+/'''+str(mask)+f'''
+{bit_mask_1:<10} {bit_mask_2:<10} {bit_mask_3:<10} {bit_mask_4:<10} 
+{bit_mask_oct1:<10} {bit_mask_oct2:<10} {bit_mask_oct3:<10} {bit_mask_oct4:<10} 
+''')
