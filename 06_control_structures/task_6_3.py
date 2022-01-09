@@ -65,7 +65,7 @@ trunk_template = [
     "switchport trunk allowed vlan",
 ]
 
-access = {"0/12": "10", "0/14": "11", "0/16": "17", "0/17": "150"}
+access = {"0/12": "10", "0/15": "11", "0/16": "17", "0/17": "150"}
 trunk = {
     "0/1": ["add", "10", "20"],
     "0/2": ["only", "11", "30"],
@@ -74,10 +74,40 @@ trunk = {
     "0/7": ["only", "30"],
 }
 
-# for intf, vlan in access.items():
-#     print("interface FastEthernet" + intf)
-#     for command in access_template:
-#         if command.endswith("access vlan"):
-#             print(f" {command} {vlan}")
-#         else:
-#             print(f" {command}")
+intf = input ('Введите номер интерфейса: ')
+# vlan = input('Введите номер vlan: ')
+
+#### check intf 
+if intf in access :
+    print('Интерфейс в access списке')
+#### generate config for access port
+    for intf, vlan in access.items():   
+        print("interface FastEthernet " + intf)
+        for command in access_template:
+            if command.endswith("access vlan"):
+                print(f" {command} {vlan}")
+            else:
+                print(f" {command}")
+#### generate congfig for trunk port
+elif intf in trunk:
+    for intf, vlan in trunk.items():
+        print("interface FastEthernet " + intf)
+        vlan_attr = len(vlan)
+        for command in trunk_template:
+            if command.endswith("allowed vlan") and vlan_attr == 3:
+                print(f" {command} " + vlan[0] + ' ' + vlan[vlan_attr-1] + ',' + vlan[vlan_attr-2])
+            elif command.endswith("allowed vlan"):
+                print(f" {command} " + vlan[0] + ' ' + vlan[vlan_attr-1])
+            else:
+                print(f" {command}")
+else:
+    print(intf, 'отсуствует в списке')
+
+    
+    # for intf, vlan in access.items():
+        # print("interface FastEthernet" + intf)
+            # for command in access_template:
+                # if command.endswith("access vlan"):
+                    # print(f" {command} {vlan}")
+                # else:
+                    # print(f" {command}")
