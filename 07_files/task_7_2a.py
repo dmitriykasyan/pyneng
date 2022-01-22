@@ -17,3 +17,21 @@
 """
 
 ignore = ["duplex", "alias", "configuration"]
+
+from sys import argv
+with open (argv[1]) as f:
+    for line in f:
+        if line.startswith('/n') is not True and \
+           line.startswith('!') is not True and \
+           line.startswith(ignore[0]) is not True and \
+           line.startswith(ignore[1]) is not True and \
+           line.startswith(ignore[2]) is not True:
+            print(line.strip('\n'))
+#       for exept in ignore:
+#           if line.startswith('/n') is not True and \
+#              line.startswith('!') is not True and \
+#              line.startswith(exept) is not True:
+#               print(line.strip('/n'))
+#               pass
+#           else:
+#               print(line.strip('/n'))
