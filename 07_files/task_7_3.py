@@ -20,3 +20,16 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+n=0
+
+from pprint import pprint
+from sys import argv
+with open (argv[1]) as f:
+    for line in f:
+        line = line.split()
+        if line and line[0].isdigit():
+            n +=1
+#           print(n, type(n), line, type(line))
+            vlan, mac_addr,type_intf, intf = line
+            print (f'{vlan:<8} {mac_addr:<18} {intf:<}')

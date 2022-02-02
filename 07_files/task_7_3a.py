@@ -40,3 +40,25 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+result=[]
+n=0
+
+from pprint import pprint
+from sys import argv
+with open (argv[1]) as f:
+    for line in f:
+        line = line.split()
+        if line and line[0].isdigit():
+            n +=1
+#           print(n, type(n), line, type(line))
+#           vlan, mac_addr,type_intf, intf = line
+#           print (f'{vlan:<8} {mac_addr:<18} {intf:<}')
+            vlan = int(line[0])
+            mac_addr = line[1]
+            intf = line[3]
+            result.append([vlan, mac_addr, intf])
+
+pprint (result)
+result.sort()
+for colonum in result:
+    print(f'{colonum[0]:<8} {colonum[1]:<18} {colonum[2]}')
