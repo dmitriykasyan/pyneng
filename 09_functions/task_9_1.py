@@ -64,6 +64,7 @@ access_config_2 = {
     "FastEthernet0/09": 107,
 }
 
+from pprint import pprint
 
 def generate_access_config(intf_vlan_mapping, access_template):
     """
@@ -75,3 +76,22 @@ def generate_access_config(intf_vlan_mapping, access_template):
 
     Возвращает список всех портов в режиме access с конфигурацией на основе шаблона
     """
+    generate_access_config_list = []
+    for intf, vlan in intf_vlan_mapping.items():
+        print ('Interface ', intf)
+        generate_access_config_list.append(f'Interface {intf}')
+        for string in access_template:
+            if string.startswith('switchport access'):
+                print (string + ' ',vlan)
+                generate_access_config_list.append(f'{string} {vlan}')
+            else:
+                print (string)
+                generate_access_config_list.append(f'{string}')
+    return generate_access_config_list
+
+#iintf_vlan_mapping = access_config
+generate_access_config(access_config_2, access_mode_template)
+
+pprint(generate_access_config)
+
+
