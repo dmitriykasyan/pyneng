@@ -39,9 +39,9 @@
 'switchport trunk allowed vlan 11,30',
 ...]
 
-
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+from pprint import pprint 
 
 trunk_mode_template = [
     "switchport mode trunk",
@@ -60,3 +60,27 @@ trunk_config_2 = {
     "FastEthernet0/15": [111, 130],
     "FastEthernet0/14": [117],
 }
+
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
+    """
+    Genegate vlan config
+    """
+    result= []
+    for intf, vlans in intf_vlan_mapping.items():
+        result.append(f'Interface {intf}')
+        vlans_str=[]
+        for vl in vlans:
+            vlans_str.append(str(vl))
+        for string in trunk_template:
+            if string.endswith('allowed vlan'):
+                vl=','.join(vlans_str)
+                result.append(f'{string} {vl}')
+            else:
+                result.append(f'{string}')
+
+    return result
+
+
+pprint(generate_trunk_config(trunk_config,trunk_mode_template))
+
+
