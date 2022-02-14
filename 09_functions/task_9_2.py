@@ -81,6 +81,6 @@ def generate_trunk_config(intf_vlan_mapping, trunk_template):
     return result
 
 
-pprint(generate_trunk_config(trunk_config,trunk_mode_template))
+pprint(generate_trunk_config(trunk_config_2,trunk_mode_template))
 
 
