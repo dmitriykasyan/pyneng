@@ -45,8 +45,11 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 
-ignore = ["duplex", "alias", "configuration"]
+from pprint import pprint
 
+ignore = ["duplex", "alias", "configuration"]
+#result = {}
+#config_data = []
 
 def ignore_command(command, ignore):
     """
@@ -64,3 +67,23 @@ def ignore_command(command, ignore):
         if word in command:
             ignore_status = True
     return ignore_status
+
+
+def convert_config_to_dict(filename):
+
+    with open (filename) as f:
+        result = {}
+        config_data = []
+        for line in f:
+            if '!' not in line and ignore_command (line, ignore) == False:
+                pass
+                if line.startswith(' ') == False: #not in line
+                   config_key = f'{line.strip()}'
+                   result[config_key] = None
+                elif line.startswith(' ') == True: #' ' in line
+                    config_data.append(f'{line.strip()}')
+                    result[config_key] = config_data
+
+    return result
+
+pprint(convert_config_to_dict('config_r1.txt'))
