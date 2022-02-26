@@ -79,7 +79,7 @@ def convert_config_to_dict(filename):
                 pass
                 if line.startswith(' ') == False: #not in line
                    config_key = f'{line.strip()}'
-                   result[config_key] = None
+                   result[config_key] = []
                 elif line.startswith(' ') == True: #' ' in line
                     config_data.append(f'{line.strip()}')
                     result[config_key] = config_data
