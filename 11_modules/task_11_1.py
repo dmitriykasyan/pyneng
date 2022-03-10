@@ -35,41 +35,46 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 """
 from pprint import pprint
 
-#def parse_cdp_neighbors(command_output):
-#    """
-#    Тут мы передаем вывод команды одной строкой потому что именно в таком виде будет
-#    получен вывод команды с оборудования. Принимая как аргумент вывод команды,
-#    вместо имени файла, мы делаем функцию более универсальной: она может работать
-#    и с файлами и с выводом с оборудования.
-#    Плюс учимся работать с таким выводом.
-#    """
-#
-#
-#if __name__ == "__main__":
-#    with open("sh_cdp_n_sw1.txt") as f:
-#        print(parse_cdp_neighbors(f.read()))
 
 dict_result = {}
-#key = ()
-#temp_keys = []
-#item_key = ''
 
-with open('sh_cdp_n_sw1.txt') as f:
-    for string in f:
-        #print (string)
+def parse_cdp_neighbors(command_output):
+    """
+    Тут мы передаем вывод команды одной строкой потому что именно в таком виде будет
+    получен вывод команды с оборудования. Принимая как аргумент вывод команды,
+    вместо имени файла, мы делаем функцию более универсальной: она может работать
+    и с файлами и с выводом с оборудования.
+    Плюс учимся работать с таким выводом.
+    """
+
+#   print(command_output)
+    a=command_output.split('\n')
+#   print ('количество считанных строк - ', len(a))
+#   pprint (a)
+    
+    for string in a:
         if 'cdp' in string:
-#           print (string.split('>')[0])
-#           item_key.append(string.split('>')[0])
             item_key = (string.split('>')[0])
-#           print (string.split('>')[0])
         elif 'Eth' in string:
-#           print (string.split())
-#           item_key.append(string.split()[0])
-#           print (tuple(item_key))
             name, l_t_intf, l_intf, *other, r_t_intf, r_intf = string.split()
-            print (f'{item_key:4}{l_t_intf:6}{l_intf:6}--- {name:6}{r_t_intf:6}{r_intf}')
-#           print (type(item_key),type(l_t_intf),type(l_intf),type(name),type(r_t_intf),type(r_intf))
-#           temp_keys=append()item_key,l_t_intf+l_intf
-#           print (key)
-            dict_result[tuple([item_key, f'{l_t_intf}{l_intf}'])]=tuple([name, f'{r_t_intf}{r_intf}'])
+            dict_result[tuple([item_key, f'{l_t_intf}{l_intf}'])]=\
+                    tuple([name, f'{r_t_intf}{r_intf}'])
     pprint (dict_result)
+
+
+if __name__ == "__main__":
+    with open("sh_cdp_n_r3.txt") as f:
+        print(parse_cdp_neighbors(f.read()))
+
+#dict_result = {}
+#
+#with open('sh_cdp_n_sw1.txt') as f:
+#    for string in f:
+#        if 'cdp' in string:
+#            item_key = (string.split('>')[0])
+#        elif 'Eth' in string:
+#            name, l_t_intf, l_intf, *other, r_t_intf, r_intf = string.split()
+##           print (f'{item_key:4}{l_t_intf:6}{l_intf:6}--- {name:6}{r_t_intf:6}{r_intf}')
+#            dict_result[tuple([item_key, f'{l_t_intf}{l_intf}'])]=\
+#                    tuple([name, f'{r_t_intf}{r_intf}'])
+#    pprint (dict_result)
