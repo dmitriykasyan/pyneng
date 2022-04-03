@@ -36,7 +36,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 from pprint import pprint
 
 
-dict_result = {}
+#dict_result = {}
 
 def parse_cdp_neighbors(command_output):
     """
@@ -47,11 +47,11 @@ def parse_cdp_neighbors(command_output):
     Плюс учимся работать с таким выводом.
     """
 
+    dict_result = {}
 #   print(command_output)
     a=command_output.split('\n')
 #   print ('количество считанных строк - ', len(a))
-#   pprint (a)
-    
+
     for string in a:
         if 'cdp' in string:
             item_key = (string.split('>')[0])
@@ -59,12 +59,14 @@ def parse_cdp_neighbors(command_output):
             name, l_t_intf, l_intf, *other, r_t_intf, r_intf = string.split()
             dict_result[tuple([item_key, f'{l_t_intf}{l_intf}'])]=\
                     tuple([name, f'{r_t_intf}{r_intf}'])
-    pprint (dict_result)
+    return dict_result
 
 
 if __name__ == "__main__":
-    with open("sh_cdp_n_r3.txt") as f:
-        print(parse_cdp_neighbors(f.read()))
+    with open("sh_cdp_n_sw1.txt") as f:
+        result = parse_cdp_neighbors(f.read())
+#       print(parse_cdp_neighbors(f.read()))
+    pprint (result)
 
 #dict_result = {}
 #
