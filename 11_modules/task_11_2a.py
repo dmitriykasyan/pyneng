@@ -73,6 +73,9 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+import draw_network_graph as draw_graph
+import task_11_2 as t2
+from pprint import pprint 
 
 infiles = [
     "sh_cdp_n_sw1.txt",
@@ -80,3 +83,20 @@ infiles = [
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+
+## Производми парсинг файлов
+net_map = t2.create_network_map(infiles)
+pprint (net_map)
+## Результат верный
+
+## Передаем данные на отрисовку
+
+#result=draw_graph.draw_topology(net_map, "my_topology")
+#print (result)
+## Результат не верный так как дублируютя данные для SW1
+
+## Удвлим дублирующиеся данные
+
+#for a,b in net_map.items():
+#     if a != b:
+#         print (a,b)
