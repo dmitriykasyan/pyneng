@@ -17,3 +17,25 @@ IP-адрес считается доступным, если выполнени
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+def get_ping_status(ip_address):
+
+    import subprocess
+
+    my_ping=['ping', '-c', '4', ip_address]
+    
+    reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
+    
+    if reply.returncode == 0:
+        ping_status = 'Alive'
+        return ping_status
+#       print('Alive')
+    else:
+        ping_status ='Unreachable'
+        return ping_status
+#       print('Unreachable')
+#   return ping_status
+
+ping_status = ''
+get_ping_status('8.8.8.8')
+print (ping_status)
