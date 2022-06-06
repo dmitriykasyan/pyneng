@@ -52,7 +52,7 @@ IP-адрес считается доступным, если выполнени
 
 import subprocess
 
-check_ip_addresses=['8.8.8.8','192.168.0.1']
+check_ip_addresses=['9.9.9.9','8.8.8.8','192.168.0.1']
 
 ip_alive = []
 ip_unreacheble = []
@@ -63,12 +63,13 @@ for i in check_ip_addresses:
     reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
 
     if reply.returncode == 0:
-        print ('Alive '+i)
-#       ping_status = 'Alive'
-        ip_alive = ip_alive.append()
+        ip_alive.append(i)
     elif reply.returncode != 0:
-        print ('Unreachable' + i)
-#       ping_status ='Unreachable'
-        ip_unreacheble = ip_unreacheble.append()
-    print (ip_alive)
-    print (ip_unreacheble)
+        ip_unreacheble.append(i)
+
+print (ip_alive)
+print (ip_unreacheble)
+
+ping_status = (ip_alive,ip_unreacheble)
+print (ping_status)
+
