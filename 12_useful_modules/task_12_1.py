@@ -18,31 +18,57 @@ IP-адрес считается доступным, если выполнени
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 
-def ping_ip_addresses(ip_address):
+#def ping_ip_addresses(ip_address):
+#
+#    import subprocess
+#
+#    ip_alive = []
+#    ip_unreacheble = []
+#
+#    for i in ip_address:
+#        my_ping=['ping', '-c', '4', i]
+#
+#        reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
+#
+#        if reply.returncode == 0:
+#            ip_alive.append
+##           ping_status = 'Alive'
+#        elif reply.returncode != 0:
+##           ping_status ='Unreachable'
+#            ip_unreacheble.append
+#        print ('in def' + ip_address, ip_unreacheble)
+#    return ip_address, ip_unreacheble
+#
+#
+#check_ip_addresses=['8.8.8.8','192.168.0.1']
+#
+#result = ping_ip_addresses(check_ip_addresses)
+## result = ping_ip_addresses('192.168.1.1')
+#print ('Host is ' + result)
+#print (result)
 
-    import subprocess
 
-    ip_alive = []
-    ip_unreacheble = []
 
-    for i in ip_address:
-        my_ping=['ping', '-c', '4', i]
 
-        reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
-
-        if reply.returncode == 0:
-            ip_alive.append
-#           ping_status = 'Alive'
-        elif reply.returncode != 0:
-#           ping_status ='Unreachable'
-            ip_unreacheble.append
-        print ('in def' + ip_address, ip_unreacheble)
-    return ip_address, ip_unreacheble
-
+import subprocess
 
 check_ip_addresses=['8.8.8.8','192.168.0.1']
 
-result = ping_ip_addresses(check_ip_addresses)
-# result = ping_ip_addresses('192.168.1.1')
-print ('Host is ' + result)
-print (result)
+ip_alive = []
+ip_unreacheble = []
+
+for i in check_ip_addresses:
+    my_ping=['ping', '-c', '4', i]
+
+    reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
+
+    if reply.returncode == 0:
+        print ('Alive '+i)
+#       ping_status = 'Alive'
+        ip_alive = ip_alive.append()
+    elif reply.returncode != 0:
+        print ('Unreachable' + i)
+#       ping_status ='Unreachable'
+        ip_unreacheble = ip_unreacheble.append()
+    print (ip_alive)
+    print (ip_unreacheble)
