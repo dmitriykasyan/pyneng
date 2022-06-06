@@ -18,24 +18,31 @@ IP-адрес считается доступным, если выполнени
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 
-def get_ping_status(ip_address):
+def ping_ip_addresses(ip_address):
 
     import subprocess
 
-    my_ping=['ping', '-c', '4', ip_address]
-    
-    reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
-    
-    if reply.returncode == 0:
-        ping_status = 'Alive'
-        return ping_status
-#       print('Alive')
-    else:
-        ping_status ='Unreachable'
-        return ping_status
-#       print('Unreachable')
-#   return ping_status
+    ip_alive = []
+    ip_unreacheble = []
 
-ping_status = ''
-get_ping_status('8.8.8.8')
-print (ping_status)
+    for i in ip_address:
+        my_ping=['ping', '-c', '4', i]
+
+        reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
+
+        if reply.returncode == 0:
+            ip_alive.append
+#           ping_status = 'Alive'
+        elif reply.returncode != 0:
+#           ping_status ='Unreachable'
+            ip_unreacheble.append
+        print ('in def' + ip_address, ip_unreacheble)
+    return ip_address, ip_unreacheble
+
+
+check_ip_addresses=['8.8.8.8','192.168.0.1']
+
+result = ping_ip_addresses(check_ip_addresses)
+# result = ping_ip_addresses('192.168.1.1')
+print ('Host is ' + result)
+print (result)
