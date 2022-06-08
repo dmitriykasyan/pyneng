@@ -65,14 +65,33 @@ def convert_ranges_to_ip_list(ip_range):
                 if ipaddress.ip_address(ip_addr_end) > ipaddress.ip_address(ip_addr_start):
                     ip_st_oct1, ip_st_oct2, ip_st_oct3, ip_st_oct4 = ip_addr_start.split('.')
                     ip_end_oct1, ip_end_oct2, ip_end_oct3, ip_end_oct4 = ip_addr_end.split('.')
-                    for oct4_r in range(int(ip_st_oct4),int(ip_end_oct4)+1):
-                        result = f'{ip_st_oct1}.{ip_st_oct2}.{ip_st_oct3}.{oct4_r}'
-    #                   print (result)
-    #                   print (f'{ip_st_oct1}.{ip_st_oct2}.{ip_st_oct3}.{oct4_r}')
-                        ip_result.append(result)
+#                   for oct4_r in range(int(ip_st_oct4),int(ip_end_oct4)+1):
+#                       result = f'{ip_st_oct1}.{ip_st_oct2}.{ip_st_oct3}.{oct4_r}'
+#    #                  print (result)
+#    #                  print (f'{ip_st_oct1}.{ip_st_oct2}.{ip_st_oct3}.{oct4_r}')
+#                       ip_result.append(result)
+                    a = generate_ip_range(ip_st_oct4,ip_end_oct4,ip_st_oct1,ip_st_oct2,ip_st_oct3)
+                    ip_result.extend(a)
                 else:
                     exit
     return ip_result
+
+def generate_ip_range(ip_start,ip_end,oct_1,oct_2,oct_3):
+
+#   ip_n_start = '1'
+#   ip_n_end = '3'
+#   oct1 = '192'
+#   oct2 = '168'
+#   oct3 = '10'
+
+    res_gen_ip = []
+
+    for oct_4 in range(int(ip_n_start),int(ip_n_end)+1):
+        result = f'{oct_1}.{oct_2}.{oct_3}.{oct_4}'
+        print (result)
+        res_generate_ip_ip.append(result)
+
+    return res_generate_ip
 
 
 
