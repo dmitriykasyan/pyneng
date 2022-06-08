@@ -34,22 +34,38 @@
  '172.21.41.129', '172.21.41.130', '172.21.41.131', '172.21.41.132']
 
 """
+import ipaddress
 
 #ip_range = ['192.168.12.1','10.10.0.1-10']
 
 #for ip_addr in ip_range:
 
-ip_addr = '10.20.30.8-10'
+ip_addr = '10.20.30.1-10'
 
-oct1,oct2,oct3,oct4 = ip_addr.split('.')
+#oct1,oct2,oct3,oct4 = ip_addr.split('.')
+#
+#if '-' in  oct4:
+#    print ('oct4 is range')
+#    range_start,range_end = oct4.split('-')
+#    print ('range from '+range_start+' to '+range_end)
+##   print (list(range(int(range_start),int(range_end)+1)))
+#    for oct4_r in range(int(range_start),int(range_end)+1):
+#        print (oct1+'.'+oct2+'.'+oct3+'.'+str(oct4_r))
+#        #сделать f строку
+#else:
+#    print ('oct4 is`t range')
+#    print (ip_addr)
 
-if '-' in  oct4:
-    print ('oct4 is range')
-    range_start,range_end = oct4.split('-')
-    print ('range from '+range_start+' to '+range_end)
-#   print (list(range(int(range_start),int(range_end)+1)))
-    for oct4_r in range(int(range_start),int(range_end)+1):
-        print (oct1+'.'+oct2+'.'+oct3+'.'+str(oct4_r))
-else:
-    print ('oct4 is`t range')
-    print (ip_addr)
+try:
+    ip = ipaddress.ip_address(ip_addr)
+    print("IP address {} is valid.".format(ip_addr, ip))
+except ValueError:
+    print("IP address {} is not valid".format(ip_addr))
+    oct1,oct2,oct3,oct4 = ip_addr.split('.')
+    if '-' in  oct4:
+	    print ('oct4 is range')
+	    range_start,range_end = oct4.split('-')
+	    print ('range from '+range_start+' to '+range_end)
+	#   print (list(range(int(range_start),int(range_end)+1)))
+	    for oct4_r in range(int(range_start),int(range_end)+1):
+	        print (oct1+'.'+oct2+'.'+oct3+'.'+str(oct4_r))
