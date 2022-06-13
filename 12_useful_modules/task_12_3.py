@@ -18,3 +18,12 @@ Reachable    Unreachable
              10.1.1.9
 
 """
+import task_12_1 as chk_ip
+from tabulate import tabulate
+
+columns = ['Reacheble','Unreacheble']
+my_ip = ['8.8.8.8','87.250.250.242','192.168.100.1','192.168.1.1','192.168.2.1']
+
+def_res = chk_ip.ping_ip_addresses(my_ip)
+
+result = {columns[n]: def_res[n] for n in range(len(columns))}

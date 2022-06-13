@@ -25,7 +25,7 @@ def ping_ip_addresses(check_ip_address):
     ip_alive = []
     ip_unreacheble = []
 
-    for i in check_ip_addresses:
+    for i in check_ip_address:
         my_ping=['ping', '-c', '3', i]
 
         reply = subprocess.run(my_ping,stdout=subprocess.DEVNULL)
@@ -39,11 +39,11 @@ def ping_ip_addresses(check_ip_address):
     return ping_status
 
 
+if __name__ == '__main__':
 
+    check_ip_addresses=['9.9.9.9','8.8.8.8','192.168.0.1']
 
-check_ip_addresses=['9.9.9.9','8.8.8.8','192.168.0.1']
+    #result = ping_ip_addresses(check_ip_addresses)
+    #print (result)
 
-#result = ping_ip_addresses(check_ip_addresses)
-#print (result)
-
-print (ping_ip_addresses(check_ip_addresses))
+    print (ping_ip_addresses(check_ip_addresses))
