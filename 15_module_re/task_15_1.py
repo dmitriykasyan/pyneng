@@ -23,18 +23,27 @@
 а не ввод пользователя.
 
 """
-import re
 
-str_1 = 'ip address 10.0.13.1 255.255.255.0'
-regex = r'(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))$'
+from pprint import pprint
 
-match = re.search(regex,str_1)
+def get_ip_from_cfg(filename):
 
-#print (match.group('ip'))
-#print (match.group('mask'))
+    import re
 
-res_regex = f"{match.group('ip')},{match.group('mask')}"
+    result = []
+    regex = r'^\s+ip\ address\s+(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))'
 
-result = tuple(res_regex.split(','))
+    with open(filename) as file:
+        for line in file:
+            match = re.search(regex,line)
 
-print(result)
+            if match != None:
+                res_regex = f"{match.group('ip')},{match.group('mask')}"
+                res_line = tuple(res_regex.split(','))
+                result.append(res_line)
+        return result
+
+
+if __name__ == '__main__':
+    pprint (get_ip_from_cfg('config_r1.txt'))
+
