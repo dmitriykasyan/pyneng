@@ -23,3 +23,18 @@
 а не ввод пользователя.
 
 """
+import re
+
+str_1 = 'ip address 10.0.13.1 255.255.255.0'
+regex = r'(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))$'
+
+match = re.search(regex,str_1)
+
+#print (match.group('ip'))
+#print (match.group('mask'))
+
+res_regex = f"{match.group('ip')},{match.group('mask')}"
+
+result = tuple(res_regex.split(','))
+
+print(result)
