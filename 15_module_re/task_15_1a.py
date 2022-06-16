@@ -24,3 +24,28 @@
 а не ввод пользователя.
 
 """
+from pprint import pprint
+
+def get_ip_from_cfg(filename):
+
+    import re
+
+    result = []
+#   regex = r'^\s+ip\ address\s+(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))'
+    regex = r'^ ip\ address (?P<ip>(\d+\.){3}(\d+))\s+(?P<mac>(\d+\.){3}(\d+))'
+
+    with open(filename) as file:
+        for line in file:
+            match = re.match(regex,line)
+
+            if match:
+#               res_regex = f"{match.group('ip')},{match.group('mask')}"
+#               res_line = tuple(res_regex.split(','))
+#               result.append(res_line)
+                result.append(match.group('ip','mac'))
+        return result
+
+
+if __name__ == '__main__':
+    pprint (get_ip_from_cfg('config_r1.txt'))
+
