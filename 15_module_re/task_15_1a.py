@@ -32,19 +32,23 @@ def get_ip_from_cfg(filename):
 
     result = []
 #   regex = r'^\s+ip\ address\s+(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))'
-    regex = (r'\s+ip\ address (?P<ip>(\d+\.){3}(\d+))'
-             r'\s+'
-             r'(?P<mac>(\d+\.){3}(\d+))')
+    # regex = (
+    #         'interface\s+(?P<intf>\S+)*'
+    #         '\s+ip\ address (?P<ip>(\d+\.){3}(\d+)).+'
+    #         '(?P<mac>(\d+\.){3}(\d+))'
+    #          )
+    regex = (
+        r'interface (?P<inf>\S)\n.+\n.+\n+'
+        r'\s+ip address (?P<ip>\S+)\s+'
+        r'(?P<mask>\S+)'
+            )
 
     with open(filename) as file:
         for line in file:
-            match = re.match(regex,line)
-
+            match = re.search(regex, line, re.DOTALL)
+            if match != None: print (match) #chek match
             if match:
-#               res_regex = f"{match.group('ip')},{match.group('mask')}"
-#               res_line = tuple(res_regex.split(','))
-#               result.append(res_line)
-                result.append(match.group('ip','mac'))
+                result.append(match.group('ip','mask'))
         return result
 
 
