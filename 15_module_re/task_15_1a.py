@@ -25,10 +25,10 @@
 
 """
 from pprint import pprint
+import re
 
 def get_ip_from_cfg(filename):
 
-    import re
 
     result = []
 #   regex = r'^\s+ip\ address\s+(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))'
