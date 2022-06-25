@@ -29,29 +29,23 @@ import re
 
 def get_ip_from_cfg(filename):
 
-
-    result = []
-#   regex = r'^\s+ip\ address\s+(?P<ip>(\d+\.){3}(\d+))\s+(?P<mask>(\d+\.){3}(\d+))'
-    # regex = (
-    #         'interface\s+(?P<intf>\S+)*'
-    #         '\s+ip\ address (?P<ip>(\d+\.){3}(\d+)).+'
-    #         '(?P<mac>(\d+\.){3}(\d+))'
-    #          )
-    regex = (
-        r'interface (?P<inf>\S)\n.+\n.+\n+'
-        r'\s+ip address (?P<ip>\S+)\s+'
-        r'(?P<mask>\S+)'
-            )
+    result = {}
+    regex = ('!.*?interface (?P<intf>\S+).+? ip address (?P<ip>\S+) (?P<mask>\S+).*?!')
 
     with open(filename) as file:
-        for line in file:
-            match = re.search(regex, line, re.DOTALL)
-            if match != None: print (match) #chek match
-            if match:
-                result.append(match.group('ip','mask'))
+        data = file.read()
+        match = re.finditer(regex, data, re.DOTALL)
+        for m in match:
+            # print (m.groups()) 
+            result[m.group('intf')] = m.group('ip', 'mask')
         return result
 
 
 if __name__ == '__main__':
-    pprint (get_ip_from_cfg('config_r1.txt'))
+    pprint (get_ip_from_cfg('config_r1.txt'),sort_dicts=0)
 
+"""
+{'Loopback0': ('10.1.1.1', '255.255.255.255'),
+ 'Ethernet0/0': ('10.0.13.1', '255.255.255.0'),
+ 'Ethernet0/2': ('10.0.19.1', '255.255.255.0')}
+"""
