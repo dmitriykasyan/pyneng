@@ -22,20 +22,31 @@
 
 """
 import re
+from pprint import pprint
 
-lines = '''
-Interface                  IP-Address      OK? Method Status                Protocol
-FastEthernet0/0            15.0.15.1       YES manual up                    up
-FastEthernet0/1            10.0.12.1       YES manual up                    up
+def parse_sh_ip_int_br(fname):
+  with open(fname) as f:
+    data = f.read()
+
+    regexp =  r'(\S+) +'\
+              r'([\d.]+) +'\
+              r'\w+ \w+ +'\
+              r'(up|down|administratively down) +'\
+              r'(up|down)'
+
+    result = [m.groups() for m in re.finditer(regexp,data)]
+    return result
+
+
+if __name__ == '__main__':
+  pprint (parse_sh_ip_int_br('sh_ip_int_br.txt'))
+
 '''
-
-regexp =  r'(\S+) +'\
-          r'([\d.]+) +'\
-          r'\w+ \w+ +'\
-          r'(up|down|administratively down) +'\
-          r'(up|down)'
-
-result = re.finditer(regexp,lines)
-
-for match in result:
-  print (match.groups())
+vagrant@PyNEng: $  [main|✚ 1⚑ 1] 
+03:39 $ /home/vagrant/venv/pyneng-py3-8/bin/python /home/vagrant/CourseDir/pyneng/15_module_re/task_15_2.py
+[('FastEthernet0/0', '15.0.15.1', 'up', 'up'),
+ ('FastEthernet0/1', '10.0.12.1', 'up', 'up'),
+ ('FastEthernet0/2', '10.0.13.1', 'up', 'up'),
+ ('Loopback0', '10.1.1.1', 'up', 'up'),
+ ('Loopback100', '100.0.0.1', 'up', 'up')]
+'''
