@@ -32,30 +32,29 @@ object network LOCAL_10.1.9.5
 
 Во всех правилах для ASA интерфейсы будут одинаковыми (inside,outside).
 """
-
-### Фукция парсинга файла
 import re
 from pprint import pprint
 
-# list = "ip nat inside source static tcp 10.66.0.13 995 interface GigabitEthernet0/1 995"
+def parse_cisco_nat_conf(fname):
+### Фукция парсинга файла
+  """
+  Выделить следующие поля из строк:
+  ip, tcp, src_port, dst_port
+  """
 
-with open('cisco_nat_config.txt') as f:
-  data = f.read()
+  with open(fname) as f:
+    data = f.read()
+    regexp = r'static (\S+) +'\
+             r'([\d.]+) +'\
+             r'(\d+) +'\
+             r'\w+ \S+ +'\
+             r'(\d+)'  
+    result = [m.groups() for m in re.finditer(regexp,data)]
+    # pprint (result)
+    return result
 
-# """
-# Выделить следующие поля из строк:
-# ip, tcp, src_port, dst_port
-# """
-
-  regexp = r'static (\S+) +'\
-           r'([\d.]+) +'\
-           r'(\d+) +'\
-           r'\w+ \S+ +'\
-           r'(\d+)'  
-  result = [m.groups() for m in re.finditer(regexp,data)]
-
-  pprint (result)
-
+if __name__ == "__main__":
+  pprint(parse_cisco_nat_conf('cisco_nat_config.txt'))
 """
 08:44 $ /home/vagrant/venv/pyneng-py3-8/bin/python /home/vagrant/CourseDir/pyneng/15_module_re/task_15_3.py
 [('tcp', '10.66.0.13', '995', '995'),
